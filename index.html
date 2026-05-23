@@ -1146,11 +1146,11 @@ function goTo(id) {
 
 // ── CLOCK ──
 function updateClock() {
+  const el = document.getElementById('clock');
+  if (!el) return;
   const now = new Date();
-  document.getElementById('clock').textContent = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+  el.textContent = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
 }
-updateClock();
-setInterval(updateClock, 10000);
 
 // ── TOAST ──
 function showToast(msg) {
@@ -1575,6 +1575,8 @@ function openBadgeModal(icon, name, desc) {
 
 // ── INIT ──
 function initApp() {
+  updateClock();
+  setInterval(updateClock, 10000);
   buildAll();
   renderPRList();
   renderPlats();
