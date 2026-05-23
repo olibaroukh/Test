@@ -2,7 +2,7 @@
   "name": "Nutrifit",
   "short_name": "Nutrifit",
   "description": "Sport, récupération & nutrition — tout en un",
-  "start_url": "/nutrifit/",
+  "start_url": "/Test/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#111110",
