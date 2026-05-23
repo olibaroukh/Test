@@ -10,21 +10,15 @@
   "icons": [
     {
       "src": "nutrifit icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "apple-touch-icon"
-    },
-    {
-      "src": "nutrifit icon.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
       "src": "nutrifit icon.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     }
   ]
 }
