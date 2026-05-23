@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Nutrifit">
 <meta name="theme-color" content="#111110">
@@ -33,17 +34,17 @@ body{color:var(--t1);font-family:-apple-system,'Helvetica Neue',sans-serif;font-
 
 /* ── SCREENS ── */
 .screens{flex:1;overflow:hidden;position:relative;}
-.screen{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:90px;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease;}
+.screen{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,44px);padding-bottom:calc(90px + env(safe-area-inset-bottom, 34px));opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease;}
 .screen.active{opacity:1;pointer-events:all;transform:translateY(0);}
 .screen::-webkit-scrollbar{display:none;}
 
 /* ── STATUS BAR ── */
-.status-bar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:12px;font-weight:600;color:var(--t1);flex-shrink:0;background:var(--dark);}
+
 
 /* ── BOTTOM NAV ── */
-.bottom-nav{flex-shrink:0;background:rgba(17,17,16,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:0.5px solid var(--border);padding:8px 0 0;padding-bottom:max(20px, env(safe-area-inset-bottom));display:flex;justify-content:space-around;align-items:center;z-index:100;}
+.bottom-nav{flex-shrink:0;background:rgba(17,17,16,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:0.5px solid var(--border);padding:10px 0 0;padding-bottom:max(28px, env(safe-area-inset-bottom, 28px));display:flex;justify-content:space-around;align-items:center;z-index:100;}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:4px 12px;border-radius:10px;transition:all .15s;}
-.nav-icon{font-size:20px;color:var(--t3);transition:color .15s;}
+.nav-icon{display:flex;align-items:center;justify-content:center;color:var(--t3);transition:color .15s;}
 .nav-label{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;transition:color .15s;}
 .nav-item.active .nav-icon,.nav-item.active .nav-label{color:var(--gold);}
 .nav-center{width:52px;height:52px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;margin-top:-18px;box-shadow:0 0 0 5px rgba(200,169,110,0.12);color:var(--dark);transition:transform .2s;flex-shrink:0;}
@@ -67,7 +68,7 @@ body{color:var(--t1);font-family:-apple-system,'Helvetica Neue',sans-serif;font-
 /* MODAL */
 .modal-wrap{display:none;position:fixed;inset:0;z-index:200;background:rgba(10,10,9,0.88);align-items:flex-end;justify-content:center;}
 .modal-wrap.open{display:flex;}
-.modal{width:100%;max-width:420px;background:var(--dark-2);border-radius:var(--r-lg) var(--r-lg) 0 0;border:0.5px solid var(--border);padding:24px 20px calc(44px + env(safe-area-inset-bottom,0px));animation:slideUp .25s ease;}
+.modal{width:100%;max-width:420px;background:var(--dark-2);border-radius:var(--r-lg) var(--r-lg) 0 0;border:0.5px solid var(--border);padding:24px 20px calc(44px + env(safe-area-inset-bottom, 24px));animation:slideUp .25s ease;}
 @keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal-handle{width:36px;height:4px;background:var(--dark-4);border-radius:2px;margin:0 auto 20px;}
 .modal-type{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;}
@@ -574,7 +575,7 @@ body{color:var(--t1);font-family:-apple-system,'Helvetica Neue',sans-serif;font-
 .login-logo-img{width:52px;height:52px;border-radius:10px;object-fit:cover;}
 .login-brand{font-family:var(--font-serif);font-size:26px;letter-spacing:3px;text-transform:uppercase;color:var(--t1);margin-bottom:6px;}
 .login-subtitle{font-family:var(--font-serif);font-size:13px;color:var(--t3);font-style:italic;}
-.login-form{padding:8px 28px calc(48px + env(safe-area-inset-bottom,0px));}
+.login-form{padding:8px 28px calc(48px + env(safe-area-inset-bottom, 24px));}
 .login-label{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--t3);margin-bottom:8px;display:block;}
 .login-input{width:100%;background:var(--dark-3);border:0.5px solid var(--border);border-radius:var(--r-md);padding:15px 16px;font-size:16px;color:var(--t1);outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:16px;font-family:-apple-system,'Helvetica Neue',sans-serif;box-sizing:border-box;}
 .login-input:focus{border-color:var(--gold-border);}
@@ -636,14 +637,6 @@ body{color:var(--t1);font-family:-apple-system,'Helvetica Neue',sans-serif;font-
 </div>
 
 <div class="app" id="main-app" style="display:none;">
-
-  <!-- STATUS BAR -->
-  <div class="status-bar">
-    <span id="clock">9:41</span>
-    <div style="display:flex;gap:6px;align-items:center;font-size:12px;">
-      <span>●●●</span><span>WiFi</span><span>🔋</span>
-    </div>
-  </div>
 
   <!-- SCREENS -->
   <div class="screens">
@@ -993,11 +986,25 @@ body{color:var(--t1);font-family:-apple-system,'Helvetica Neue',sans-serif;font-
 
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
-    <div class="nav-item active" id="nav-home" onclick="goTo('home')"><div class="nav-icon">🏠</div><div class="nav-label">Accueil</div></div>
-    <div class="nav-item" id="nav-reservations" onclick="goTo('reservations')"><div class="nav-icon">📅</div><div class="nav-label">Cours</div></div>
-    <div class="nav-center" onclick="goTo('reservations')">+</div>
-    <div class="nav-item" id="nav-profil" onclick="goTo('profil')"><div class="nav-icon">👤</div><div class="nav-label">Profil</div></div>
-    <div class="nav-item" id="nav-nutrition" onclick="goTo('nutrition')"><div class="nav-icon">🥗</div><div class="nav-label">Nutrition</div></div>
+    <div class="nav-item active" id="nav-home" onclick="goTo('home')">
+      <div class="nav-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
+      <div class="nav-label">Accueil</div>
+    </div>
+    <div class="nav-item" id="nav-reservations" onclick="goTo('reservations')">
+      <div class="nav-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+      <div class="nav-label">Cours</div>
+    </div>
+    <div class="nav-center" onclick="goTo('reservations')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="nav-item" id="nav-profil" onclick="goTo('profil')">
+      <div class="nav-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+      <div class="nav-label">Profil</div>
+    </div>
+    <div class="nav-item" id="nav-nutrition" onclick="goTo('nutrition')">
+      <div class="nav-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 6 4 10c0 5 4 9 8 12 4-3 8-7 8-12 0-4-4-8-8-8z"/><path d="M12 6v8M8 10h8"/></svg></div>
+      <div class="nav-label">Nutrition</div>
+    </div>
   </nav>
 
 </div><!-- /app -->
