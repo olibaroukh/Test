@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Nutrifit">
 <meta name="theme-color" content="#111110">
@@ -42,7 +41,7 @@ body{color:var(--t1);font-family:-apple-system,'Helvetica Neue',sans-serif;font-
 .status-bar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:12px;font-weight:600;color:var(--t1);flex-shrink:0;background:var(--dark);}
 
 /* ── BOTTOM NAV ── */
-.bottom-nav{flex-shrink:0;background:rgba(17,17,16,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:0.5px solid var(--border);padding:10px 0 env(safe-area-inset-bottom,16px);display:flex;justify-content:space-around;align-items:center;z-index:100;}
+.bottom-nav{flex-shrink:0;background:rgba(17,17,16,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:0.5px solid var(--border);padding:8px 0 0;padding-bottom:max(20px, env(safe-area-inset-bottom));display:flex;justify-content:space-around;align-items:center;z-index:100;}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:4px 12px;border-radius:10px;transition:all .15s;}
 .nav-icon{font-size:20px;color:var(--t3);transition:color .15s;}
 .nav-label{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;transition:color .15s;}
@@ -551,10 +550,92 @@ body{color:var(--t1);font-family:-apple-system,'Helvetica Neue',sans-serif;font-
 .pts-earn{color:var(--gold);}
 .pts-spend{color:#E06090;}
 .pts-val-text{font-family:var(--font-serif);font-size:16px;}
+
+/* ═══════════════════════════════════════
+   SPLASH & LOGIN
+═══════════════════════════════════════ */
+#splash{position:fixed;inset:0;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1000;transition:opacity .6s ease;}
+#splash.hidden{opacity:0;pointer-events:none;}
+.splash-logo-box{width:90px;height:90px;border-radius:22px;border:1.5px solid var(--gold-border);background:var(--gold-dim);display:flex;align-items:center;justify-content:center;margin-bottom:20px;animation:splashPulse 2s ease infinite;}
+@keyframes splashPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,0.2)}50%{box-shadow:0 0 0 16px rgba(200,169,110,0)}}
+.splash-logo-img{width:64px;height:64px;border-radius:14px;object-fit:cover;}
+.splash-name{font-family:var(--font-serif);font-size:28px;letter-spacing:4px;text-transform:uppercase;color:var(--t1);margin-bottom:8px;}
+.splash-tagline{font-family:var(--font-serif);font-size:13px;color:var(--t3);font-style:italic;letter-spacing:1px;margin-bottom:60px;}
+.splash-loader{display:flex;gap:7px;}
+.splash-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.3;animation:dotBounce .9s ease infinite;}
+.splash-dot:nth-child(2){animation-delay:.18s;}
+.splash-dot:nth-child(3){animation-delay:.36s;}
+@keyframes dotBounce{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-5px)}}
+
+#login-screen{position:fixed;inset:0;background:var(--dark);display:none;flex-direction:column;z-index:999;overflow-y:auto;}
+#login-screen.visible{display:flex;}
+.login-top{display:flex;flex-direction:column;align-items:center;padding:80px 32px 32px;}
+.login-logo-box{width:72px;height:72px;border-radius:18px;border:1.5px solid var(--gold-border);background:var(--gold-dim);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.login-logo-img{width:52px;height:52px;border-radius:10px;object-fit:cover;}
+.login-brand{font-family:var(--font-serif);font-size:26px;letter-spacing:3px;text-transform:uppercase;color:var(--t1);margin-bottom:6px;}
+.login-subtitle{font-family:var(--font-serif);font-size:13px;color:var(--t3);font-style:italic;}
+.login-form{padding:8px 28px calc(48px + env(safe-area-inset-bottom,0px));}
+.login-label{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--t3);margin-bottom:8px;display:block;}
+.login-input{width:100%;background:var(--dark-3);border:0.5px solid var(--border);border-radius:var(--r-md);padding:15px 16px;font-size:16px;color:var(--t1);outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:16px;font-family:-apple-system,'Helvetica Neue',sans-serif;box-sizing:border-box;}
+.login-input:focus{border-color:var(--gold-border);}
+.login-input::placeholder{color:var(--t3);}
+.login-input.error{border-color:#E06090;}
+.login-error{font-size:12px;color:#E06090;margin:-8px 0 14px;padding-left:4px;display:none;}
+.login-error.visible{display:block;}
+.login-btn{width:100%;padding:15px;background:var(--gold);color:var(--dark);border:none;border-radius:var(--r-md);font-size:15px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:opacity .2s;margin-top:6px;font-family:-apple-system,'Helvetica Neue',sans-serif;}
+.login-btn:active{transform:scale(0.98);}
+.login-forgot{text-align:center;margin-top:18px;font-size:13px;color:var(--t3);cursor:pointer;}
+.login-forgot em{color:var(--gold);font-style:normal;}
+.login-divider{display:flex;align-items:center;gap:12px;margin:24px 0;}
+.login-divider-line{flex:1;height:.5px;background:var(--border);}
+.login-divider-text{font-size:12px;color:var(--t3);}
+.login-demo{width:100%;padding:13px;background:transparent;color:var(--t2);border:0.5px solid var(--border);border-radius:var(--r-md);font-size:13px;cursor:pointer;transition:all .2s;font-family:-apple-system,'Helvetica Neue',sans-serif;}
+.login-demo:hover{border-color:var(--border-h);color:var(--t1);}
 </style>
 </head>
 <body>
-<div class="app">
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-logo-box">
+    <img src="nutrifit icon.png" class="splash-logo-img" alt="NF" onerror="this.outerHTML='<span style=\'font-family:serif;font-size:30px;font-weight:700;color:#C8A96E;\'>NF</span>'">
+  </div>
+  <div class="splash-name">Nutrifit</div>
+  <div class="splash-tagline">Sport · Récupération · Nutrition</div>
+  <div class="splash-loader">
+    <div class="splash-dot"></div>
+    <div class="splash-dot"></div>
+    <div class="splash-dot"></div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-top">
+    <div class="login-logo-box">
+      <img src="nutrifit icon.png" class="login-logo-img" alt="NF" onerror="this.outerHTML='<span style=\'font-family:serif;font-size:22px;font-weight:700;color:#C8A96E;\'>NF</span>'">
+    </div>
+    <div class="login-brand">Nutrifit</div>
+    <div class="login-subtitle">Connectez-vous à votre espace</div>
+  </div>
+  <div class="login-form">
+    <label class="login-label">Adresse e-mail</label>
+    <input class="login-input" id="login-email" type="email" placeholder="votre@email.fr" autocomplete="email" autocapitalize="none" autocorrect="off">
+    <label class="login-label">Mot de passe</label>
+    <input class="login-input" id="login-password" type="password" placeholder="••••••••" autocomplete="current-password">
+    <div class="login-error" id="login-error">E-mail ou mot de passe incorrect.</div>
+    <button class="login-btn" onclick="tryLogin()">Se connecter</button>
+    <div class="login-forgot">Mot de passe oublié ? <em>Réinitialiser</em></div>
+    <div class="login-divider">
+      <div class="login-divider-line"></div>
+      <div class="login-divider-text">ou</div>
+      <div class="login-divider-line"></div>
+    </div>
+    <button class="login-demo" onclick="loginDemo()">Accès démo — thomas@nutrifit.fr</button>
+  </div>
+</div>
+
+<div class="app" id="main-app" style="display:none;">
 
   <!-- STATUS BAR -->
   <div class="status-bar">
@@ -1486,10 +1567,66 @@ function openBadgeModal(icon, name, desc) {
 }
 
 // ── INIT ──
-buildAll();
-renderPRList();
-renderPlats();
-renderBasket();
+function initApp() {
+  buildAll();
+  renderPRList();
+  renderPlats();
+  renderBasket();
+}
+
+const USERS = [
+  { email: 'thomas@nutrifit.fr', password: 'Nutrifit2026' },
+  { email: 'demo@nutrifit.fr',   password: 'demo' },
+];
+
+function tryLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('login-password').value;
+  const errEl   = document.getElementById('login-error');
+  const emailEl = document.getElementById('login-email');
+  const passEl  = document.getElementById('login-password');
+  emailEl.classList.remove('error');
+  passEl.classList.remove('error');
+  errEl.classList.remove('visible');
+  const user = USERS.find(u => u.email === email && u.password === pass);
+  if (!user) {
+    emailEl.classList.add('error');
+    passEl.classList.add('error');
+    errEl.classList.add('visible');
+    passEl.value = '';
+    return;
+  }
+  enterApp();
+}
+
+function loginDemo() {
+  document.getElementById('login-email').value = 'thomas@nutrifit.fr';
+  document.getElementById('login-password').value = 'Nutrifit2026';
+  tryLogin();
+}
+
+function enterApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  const app = document.getElementById('main-app');
+  app.style.display = 'flex';
+  initApp();
+}
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const splash = document.getElementById('splash');
+    splash.classList.add('hidden');
+    setTimeout(() => {
+      splash.style.display = 'none';
+      document.getElementById('login-screen').classList.add('visible');
+    }, 600);
+  }, 2000);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const pw = document.getElementById('login-password');
+  if (pw) pw.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+});
 </script>
 </body>
 </html>
